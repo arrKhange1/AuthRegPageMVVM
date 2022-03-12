@@ -1,0 +1,58 @@
+﻿<Page x:Class="DockPanel.Views.Pages.AuthPageView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DockPanel.Views.Pages"
+      xmlns:components="clr-namespace:DockPanel.Components"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SecondPageView">
+
+    <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition />
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="LoginField"
+                 ToolTip="Login"
+                 Grid.Row="0" 
+                 FontSize="25"
+                 Text="{Binding LoginText, UpdateSourceTrigger=PropertyChanged}"
+                 BorderBrush="{Binding LoginTextBorderColor}"
+                 VerticalAlignment="Bottom"
+                 />
+        <PasswordBox x:Name="PasswordField"
+                     ToolTip="Password"
+                     Grid.Row="1" 
+                     FontSize="25" 
+                     VerticalAlignment="Bottom"
+                     components:BindablePasswordBox.BindPassword="true" 
+                     components:BindablePasswordBox.BoundPassword="{Binding Path= PasswordText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     BorderBrush="{Binding PasswordTextBorderColor}"
+                     />
+        <TextBox x:Name="EmailField" 
+                 ToolTip="Email" 
+                 Grid.Row="2"
+                 FontSize="25"
+                 Text="{Binding EmailText}"
+                 BorderBrush="{Binding EmailTextBorderColor}"
+                 VerticalAlignment="Bottom"
+                 />
+        <Button Content="Авторизоваться" Grid.Row="3" VerticalAlignment="Bottom" Margin="0 10 0 5" Command="{Binding AuthButton_Click}"/>
+
+        <Popup x:Name="LoginPopup" IsOpen="{Binding ShowLoginPopup}" StaysOpen="False" PlacementTarget="{Binding ElementName=LoginField}" AllowsTransparency="True" Opacity="0.8" >
+            <TextBlock Text="{Binding LoginPopupText}" Foreground="Red"/>
+        </Popup>
+        
+        <Popup x:Name="PasswordPopup" IsOpen="{Binding ShowPasswordPopup}" StaysOpen="False" PlacementTarget="{Binding ElementName=PasswordField}" AllowsTransparency="True" Opacity="0.8" >
+            <TextBlock Text="{Binding PasswordPopupText}" Foreground="Red"/>
+        </Popup>
+        
+        <Popup x:Name="EmailPopup" IsOpen="{Binding ShowEmailPopup}" StaysOpen="False" PlacementTarget="{Binding ElementName=EmailField}" AllowsTransparency="True" Opacity="0.8" >
+            <TextBlock Text="{Binding EmailPopupText}" Foreground="Red"/>
+        </Popup>
+    </Grid>
+</Page>

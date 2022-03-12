@@ -1,0 +1,77 @@
+﻿<Page x:Class="DockPanel.Views.Pages.RegPageView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DockPanel.Views.Pages"
+      xmlns:components="clr-namespace:DockPanel.Components"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FirstPageView">
+
+    <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition />
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.5*" />
+        </Grid.RowDefinitions>
+        <TextBox x:Name="LoginField"
+                 ToolTip="Login" 
+                 Grid.Row="0" 
+                 FontSize="25"
+                 Text="{Binding LoginText, UpdateSourceTrigger=PropertyChanged}"
+                 BorderBrush= "{Binding LoginTextBorderColor}"
+                 />
+        <PasswordBox ToolTip="Password" 
+                     Grid.Row="1" 
+                     FontSize="25"
+                     x:Name="PasswordField"
+                     components:BindablePasswordBox.BindPassword="true" 
+                     components:BindablePasswordBox.BoundPassword="{Binding Path= PasswordText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     BorderBrush="{Binding PasswordTextBorderColor, Mode=OneWay, UpdateSourceTrigger=LostFocus}"
+                     />
+        <PasswordBox ToolTip="Confirm the password"
+                     x:Name="ConfirmPasswordField"
+                     components:BindablePasswordBox.BindPassword="true" 
+                     components:BindablePasswordBox.BoundPassword="{Binding Path= ConfirmPasswordText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     BorderBrush="{Binding ConfirmPasswordTextBorderColor, UpdateSourceTrigger=LostFocus}"
+                     IsEnabled="{Binding IsConfirmPasswordEnabled, UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Row="2" 
+                     FontSize="25"
+                     />
+        <TextBox  ToolTip="Email" 
+                  Grid.Row="3" 
+                  x:Name="EmailField"
+                  FontSize="25"
+                  Text="{Binding EmailText, UpdateSourceTrigger=PropertyChanged}"
+                  BorderBrush="{Binding EmailTextBorderColor, UpdateSourceTrigger=LostFocus}"
+                  />
+        <Button Content="Зарегистрироваться" 
+                Grid.Row="4" 
+                VerticalAlignment="Bottom" 
+                Margin="0 10 0 7"
+                Command="{Binding RegButton_Click}"
+                />
+        <TextBlock Text="{Binding RegStatusText}" Grid.Row="5" HorizontalAlignment="Center"/>
+
+        <Popup x:Name="LoginPopup" IsOpen="{Binding ShowLoginPopup}" StaysOpen="False" PlacementTarget="{Binding ElementName=LoginField}" AllowsTransparency="True" Opacity="0.8" >
+            <TextBlock Text="{Binding LoginPopupText}" Foreground="{Binding LoginPopupTextColor}"/>
+        </Popup>
+
+        <Popup x:Name="PasswordPopup" IsOpen="{Binding ShowPasswordPopup}" StaysOpen="False" PlacementTarget="{Binding ElementName=PasswordField}" AllowsTransparency="True" Opacity="0.8" >
+            <TextBlock Text="{Binding PasswordPopupText}" Foreground="{Binding PasswordPopupTextColor}"/>
+        </Popup>
+
+        <Popup x:Name="ConfirmPasswordPopup" IsOpen="{Binding ShowConfirmPasswordPopup}" StaysOpen="False" PlacementTarget="{Binding ElementName=ConfirmPasswordField}" AllowsTransparency="True" Opacity="0.8" >
+            <TextBlock Text="{Binding ConfirmPasswordPopupText}" Foreground="{Binding ConfirmPasswordPopupTextColor}"/>
+        </Popup>
+
+        <Popup x:Name="EmailPopup" IsOpen="{Binding ShowEmailPopup}" StaysOpen="False" PlacementTarget="{Binding ElementName=EmailField}" AllowsTransparency="True" Opacity="0.8" >
+            <TextBlock Text="{Binding EmailPopupText}" Foreground="{Binding EmailPopupTextColor}"/>
+        </Popup>
+
+    </Grid>
+</Page>
